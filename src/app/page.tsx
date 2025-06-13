@@ -1,13 +1,28 @@
+'use client'; // 맨 위에 추가
+
 import React from 'react';
-import './globals.css';
 import './common/common.css';
 
 export default function Home() {
+    // 액션 상태를 사용하여 로그인 처리
+    async function onSubmitLoginHandler(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const userId = form.userId.value; // Access the input field by its name
+        const userPassword = form.userPassword.value;
+        
+        console.log(userId);
+        console.log(userPassword);
+
+        
+    }
+
     return (
     <div>
         <div className="login m-3 p-3" style={{ height: "900px" }}>
             <div id="login-container" className="flex flex-col justify-center">
-                <form id="login-form" className="m-3 p-3" method="post">
+                <form id="login-form" className="m-3 p-3" method="post" onSubmit={onSubmitLoginHandler} >
                     <div>
                         <div>
                             <h1 className="jetbrains-mono-semi-bold fs-30 text-center">로그인</h1>
@@ -17,7 +32,7 @@ export default function Home() {
                             <div>
                                 <p className="inline-block w-100 fs-14">아이디</p>
                                 <label>
-                                    <input type="text" name="userId" className="common-input" />
+                                    <input type="text" name="userId" id="userId" className="common-input" />
                                 </label>
                             </div>
                         </div>
