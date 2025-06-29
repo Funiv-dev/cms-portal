@@ -1,5 +1,5 @@
 const config = {
-  apiBaseUrl: "https://api.example.com",
+  apiBaseUrl: process.env.NEXT_PUBLIC_API_URL,
   apiTimeout: 5000,
   apiToken: "your-api-token",
 };

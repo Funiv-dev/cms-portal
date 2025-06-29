@@ -1,6 +1,9 @@
 'use client'; // 맨 위에 추가
 
 import React from 'react';
+
+import AxiosProdiver from './provider/AxiosProvider';
+
 import './common/common.css';
 
 export default function Home() {
@@ -15,7 +18,9 @@ export default function Home() {
         console.log(userId);
         console.log(userPassword);
 
-        
+        let instance = new AxiosProdiver().getAxiosInstance();
+        instance.get('/api/test/v2', { param1: 'value1' });
+
     }
 
     return (
