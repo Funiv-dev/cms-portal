@@ -60,7 +60,7 @@ export default function Home() {
     return (
     <div>
         <div className="flex flex-row h-screen">
-            <div className="login-page bubble flex flex-60 flex-col justify-center item-center w-50">
+            <div className="login-page bubble flex flex-60 flex-col justify-center item-center w-50 opacity-0 animate-[fadeInLeft_1s_ease-out_forwards]">
                 <div className="bubble-item"></div>
                 <div className="bubble-item"></div>
                 <div className="bubble-item"></div>
@@ -71,15 +71,15 @@ export default function Home() {
                 <div className="bubble-item"></div>
 
                 <div className='text-center text-white' style={{ position: 'relative', zIndex: 10 }}>
-                    <h1 className="text-5xl font-bold mb-4">Hannune</h1>
+                    <h1 className="text-5xl font-bold mb-4">Hannune Console</h1>
                 </div>
             </div>
 
-            <div className="flex flex-40 flex-col justify-center item-center m-10">
+            <div className="flex flex-40 flex-col justify-center item-center m-10 opacity-0 animate-[fadeInRight_1s_ease-out_0.2s_forwards]">
                 <div className='m-50'>
                     <div>
                         <h1 className="jetbrains-mono-semi-bold fs-30 text-center">로그인</h1>
-                        <p className="jetbrains-mono-light text-center m-1">Hannune 에 오신 것을 환영합니다!</p>
+                        <p className="jetbrains-mono-light text-center m-1">Hannune console에 오신 것을 환영합니다!</p>
                     </div>
                     <div className="jetbrains-mono-light mt-50">
                         <div>
