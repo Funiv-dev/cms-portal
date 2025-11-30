@@ -53,7 +53,7 @@ pipeline {
                     
                     # PM2 프로세스 재시작
                     sudo pm2 delete hannune || true
-                    sudo PORT=3001 pm2 start npm --name "hannune" -- start
+                    sudo PORT=3002 pm2 start npm --name "hannune" -- start
                     sudo pm2 save
                 '''
             }
