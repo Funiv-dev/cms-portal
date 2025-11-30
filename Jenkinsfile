@@ -34,25 +34,25 @@ pipeline {
             steps {
                 // 빌드 파일을 배포 위치로 복사
                 sh '''
-                    sudo rm -rf /opt/apps/inHouse/hannene/
-                    sudo mkdir -p /opt/apps/inHouse/hannene/
-                    sudo cp -r .next /opt/apps/inHouse/hannene/
-                    sudo cp -r public /opt/apps/inHouse/hannene/
-                    sudo cp package*.json /opt/apps/inHouse/hannene/
-                    sudo cp next.config.* /opt/apps/inHouse/hannene/ 2>/dev/null || true
-
+                    # 기존 디렉토리 삭제 및 생성
+                    sudo rm -rf ${APP_DIR}
+                    sudo mkdir -p ${APP_DIR}
+                    
+                    # Next.js 빌드 파일 복사
+                    sudo cp -r .next ${APP_DIR}/
+                    sudo cp -r public ${APP_DIR}/
+                    sudo cp package*.json ${APP_DIR}/
+                    sudo cp next.config.* ${APP_DIR}/ 2>/dev/null || true
+                    
+                    # 권한 설정
                     sudo chown -R www-data:www-data ${APP_DIR}/
                     
+                    # 배포 디렉토리로 이동하여 production 의존성 설치
+                    cd ${APP_DIR}
                     sudo npm ci --omit=dev
-                    sudo npm install
-
-                    sudo cp -r build ${APP_DIR}/
-                    sudo cp package*.json ${APP_DIR}/
-
-                    # PM2 프로세스 삭제 (있다면)
-                    sudo pm2 delete hannune || true
                     
-                    # PM2로 시작
+                    # PM2 프로세스 재시작
+                    sudo pm2 delete hannune || true
                     sudo PORT=3001 pm2 start npm --name "hannune" -- start
                     sudo pm2 save
                 '''
