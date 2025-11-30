@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
-import NProgress, { set } from 'nprogress';
+import NProgress from 'nprogress';
 
 import TopLoader from '@/app/component/TopLoader';
 import AxiosProdiver from './provider/AxiosProvider';
@@ -14,6 +14,11 @@ export default function Home() {
 
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
+    
+    const onClickRememberMeHandler = () => {
+        setRememberMe(!rememberMe);
+    };
 
     // 액션 상태를 사용하여 로그인 처리
     const onSubmitLoginHandler = async () => {
@@ -66,7 +71,7 @@ export default function Home() {
 
         setTimeout(() => {
             NProgress.done();
-            
+
             setIsLoading(false);
         }, 1000);
 
@@ -119,10 +124,12 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="flex mt-1">
-                        <label>
-                            <input type="checkbox" name="remember-me" id="remember-me" className="" />
-                        </label>
-                        <p className="flex align-center ml-02 fs-13">자동 로그인</p>
+                        <div className="flex flex-row" onClick={onClickRememberMeHandler}>
+                            <label>
+                                <input type="checkbox" name="remember-me" id="remember-me" className="" checked={rememberMe} />
+                            </label>
+                            <p className="flex align-center ml-02 fs-13">자동 로그인</p>
+                        </div>
                     </div>
                     <div style={{ marginTop: "3rem" }} >
                         <button type="button" className="submit im-w-100per" onClick={onSubmitLoginHandler}>로그인</button>
