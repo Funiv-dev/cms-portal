@@ -2,12 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
+import NProgress, { set } from 'nprogress';
 
+import TopLoader from '@/app/component/TopLoader';
 import AxiosProdiver from './provider/AxiosProvider';
 
 import './common/common.css';
 
 export default function Home() {
+    const [isLoading, setIsLoading] = useState(true);
 
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
@@ -57,8 +60,27 @@ export default function Home() {
         console.log(userPassword);
     }, [userPassword]);
 
+    useEffect(() => {
+        
+        NProgress.start();
+
+        setTimeout(() => {
+            NProgress.done();
+            
+            setIsLoading(false);
+        }, 1000);
+
+    }, []);
+
     return (
     <div>
+        <TopLoader />
+        {isLoading && (
+            <div className="loading-overlay">
+                <div className="loading-spinner"></div>
+            </div>
+        )}
+
         <div className="flex flex-row h-screen">
             <div className="login-page bubble flex flex-60 flex-col justify-center item-center w-50 opacity-0 animate-[fadeInLeft_1s_ease-out_forwards]">
                 <div className="bubble-item"></div>
