@@ -34,8 +34,13 @@ pipeline {
             steps {
                 // 빌드 파일을 배포 위치로 복사
                 sh '''
-                    sudo rm -rf ${APP_DIR}/
-                    sudo cp -r build ${APP_DIR}/
+                    sudo rm -rf /opt/apps/inHouse/hannene/
+                    sudo mkdir -p /opt/apps/inHouse/hannene/
+                    sudo cp -r .next /opt/apps/inHouse/hannene/
+                    sudo cp -r public /opt/apps/inHouse/hannene/
+                    sudo cp package*.json /opt/apps/inHouse/hannene/
+                    sudo cp next.config.* /opt/apps/inHouse/hannene/ 2>/dev/null || true
+
                     sudo chown -R www-data:www-data ${APP_DIR}/
                     
                     sudo npm ci --omit=dev
