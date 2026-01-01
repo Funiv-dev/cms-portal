@@ -31,8 +31,6 @@ export default class AxiosProdiver {
       },
     });
 
-    console.log(config.apiBaseUrl);
-
     instance.interceptors.response.use(
       (response) => {
         console.log('Response:', response);
@@ -65,21 +63,23 @@ export default class AxiosProdiver {
     });
   }
   
-  public post(url: string, data = {}) {
+  public post(url: string, data = {}, headers = {}) {
     const instance = this.axiosInstance();
   
-    instance.post(url, data)
-    .then(response => {
-      if (response.status === 200) {
-        console.log("POST request successful:", response.data);
-  
-        return response.data;
-      } else {
-        console.error("Unexpected response status:", response.status);
-      }
-    })
-    .catch(error => {
-      console.error("Error in POST request:", error);
-    });
+    debugger;
+    
+    instance.post(url, data, headers)
+      .then(response => {
+        if (response.status === 200) {
+          console.log("POST request successful:", response.data);
+    
+          return response.data;
+        } else {
+          console.error("Unexpected response status:", response.status);
+        }
+      })
+      .catch(error => {
+        console.error("Error in POST request:", error);
+      });
   };
 }
